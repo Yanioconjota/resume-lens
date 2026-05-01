@@ -1,0 +1,63 @@
+---
+description: Testing patterns
+globs: ["**/*.test.ts", "**/*.test.tsx", "src/test/**/*"]
+---
+
+# Testing Rules
+
+## Mock Data
+
+- Located in `src/test/mocks/`
+- Realistic, representative data
+- Cover edge cases
+- Type-safe (match schema types)
+
+```typescript
+// Good mock data
+export const mockParsedResume: ParsedResume = {
+  personal: {
+    name: 'Alex Johnson',
+    email: 'alex@example.com',
+    // ... complete object
+  },
+  // ...
+};
+```
+
+## Test Structure
+
+```typescript
+describe('ComponentName', () => {
+  it('renders correctly with default props', () => {
+    // Arrange
+    const props = { ... };
+    
+    // Act
+    render(<Component {...props} />);
+    
+    // Assert
+    expect(screen.getByText('...')).toBeInTheDocument();
+  });
+});
+```
+
+## What to Test
+
+### Unit Tests
+- Utility functions
+- Zod schemas (valid/invalid inputs)
+- Custom hooks
+
+### Component Tests
+- Renders with various props
+- User interactions
+- Accessibility
+
+### Integration Tests
+- API routes
+- Full features
+
+## What Not to Test
+- Third-party libraries
+- Implementation details
+- Styles/CSS

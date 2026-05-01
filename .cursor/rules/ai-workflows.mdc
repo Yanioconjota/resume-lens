@@ -1,0 +1,68 @@
+---
+description: AI integration patterns
+globs: ["src/server/ai/**/*"]
+---
+
+# AI Workflow Rules
+
+## Prompt Structure
+
+```typescript
+const SYSTEM_PROMPT = `You are a resume analysis expert.
+Output ONLY valid JSON matching the schema below.
+Do not include markdown, explanations, or text outside the JSON.
+Only extract information that exists in the resume.`;
+
+const USER_PROMPT = `
+Resume text:
+${resumeText}
+
+Target role: ${targetRole}
+
+Output schema:
+${JSON.stringify(schema)}
+`;
+```
+
+## Response Handling
+
+```typescript
+async function parseAiResponse<T>(
+  response: string,
+  schema: z.ZodSchema<T>
+): Promise<T> {
+  // 1. Extract JSON from response
+  const jsonMatch = response.match(/\{[\s\S]*\}/);
+  if (!jsonMatch) {
+    throw new Error('No JSON found in response');
+  }
+  
+  // 2. Parse JSON safely
+  const parsed = safeJsonParse(jsonMatch[0]);
+  if (!parsed.success) {
+    throw new Error('Invalid JSON');
+  }
+  
+  // 3. Validate with Zod
+  const validation = schema.safeParse(parsed.data);
+  if (!validation.success) {
+    throw new Error('Schema validation failed');
+  }
+  
+  return validation.data;
+}
+```
+
+## Anti-Hallucination
+
+- Explicit "only include existing information" instructions
+- Use empty strings for missing data, not null
+- Validate output against input (sanity checks)
+- Include confidence indicators when uncertain
+
+## Error Handling
+
+- Catch API errors (rate limits, timeouts)
+- Catch parsing errors (invalid JSON, schema mismatch)
+- Return user-friendly error messages
+- Log full errors for debugging

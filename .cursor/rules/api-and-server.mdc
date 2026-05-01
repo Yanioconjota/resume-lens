@@ -1,0 +1,61 @@
+---
+description: API and server-side rules
+globs: ["src/app/api/**/*", "src/server/**/*"]
+---
+
+# API and Server Rules
+
+## API Route Structure
+
+```typescript
+import { NextResponse } from 'next/server';
+
+export async function POST(request: Request) {
+  try {
+    // 1. Parse request
+    const formData = await request.formData();
+    
+    // 2. Validate inputs
+    const validation = schema.safeParse(data);
+    if (!validation.success) {
+      return NextResponse.json(
+        { error: { code: 'VALIDATION_ERROR', message: '...' } },
+        { status: 400 }
+      );
+    }
+    
+    // 3. Process request
+    const result = await processRequest(validation.data);
+    
+    // 4. Return response
+    return NextResponse.json(result);
+    
+  } catch (error) {
+    // 5. Handle errors
+    return NextResponse.json(
+      { error: { code: 'INTERNAL_ERROR', message: '...' } },
+      { status: 500 }
+    );
+  }
+}
+```
+
+## Server-Only Code
+
+- Files in `src/server/` are server-only
+- Never import in client components
+- Use for AI calls, file parsing, sensitive logic
+
+## Validation
+
+- Use Zod for all validation
+- Validate request inputs
+- Validate AI responses
+- Return typed errors
+
+## Security
+
+- Never expose API keys to client
+- Validate file types and sizes
+- Sanitize user inputs
+- Log errors without sensitive data

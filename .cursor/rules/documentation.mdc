@@ -1,0 +1,53 @@
+---
+description: Documentation standards
+globs: ["docs/**/*", "*.md"]
+---
+
+# Documentation Rules
+
+## File Locations
+
+- `docs/` - Project documentation
+- `docs/decisions/` - Architecture Decision Records
+- `README.md` - Project overview
+
+## Documentation Types
+
+### README.md
+- Quick start guide
+- Key features
+- Development setup
+- Deployment instructions
+
+### Architecture Docs
+- System overview
+- Module boundaries
+- Data flow diagrams
+- API contracts
+
+### Decision Records
+- ADR format
+- Status, Context, Decision, Consequences
+- Numbered: `001-topic.md`
+
+## Writing Style
+
+- Clear and concise
+- Use code examples
+- Include diagrams where helpful
+- Keep up to date with code changes
+
+## Code Comments
+
+- Avoid obvious comments
+- Explain "why" not "what"
+- Document public APIs
+- Use JSDoc for complex functions
+
+```typescript
+// Bad: Increments the counter
+counter++;
+
+// Good: Retry count tracks failed API attempts for backoff calculation
+retryCount++;
+```

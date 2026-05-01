@@ -1,0 +1,59 @@
+---
+description: Frontend component patterns
+globs: ["src/components/**/*", "src/features/**/*"]
+---
+
+# Frontend Component Rules
+
+## Component Structure
+
+```typescript
+// Props interface at top
+interface ButtonProps {
+  variant?: 'primary' | 'secondary';
+  children: ReactNode;
+  className?: string;
+}
+
+// Component with explicit return type
+export function Button({ variant = 'primary', children, className }: ButtonProps) {
+  return (
+    <button className={cn(baseStyles, variantStyles[variant], className)}>
+      {children}
+    </button>
+  );
+}
+```
+
+## Styling Rules
+
+### Tailwind CSS (Default)
+- Use for layout, spacing, typography, colors
+- Keep class lists readable (break into multiple lines if long)
+- Use `cn()` utility for conditional classes
+
+### SCSS Modules (Exceptional)
+- Only when Tailwind is genuinely awkward
+- Complex animations
+- Highly specific component styling
+- Never duplicate Tailwind utilities
+
+## Component Patterns
+
+### UI Components
+- Accept `className` prop
+- Forward refs when needed
+- No domain logic
+- Fully typed props
+
+### Feature Components
+- Can be domain-aware
+- Co-located with hooks
+- Import UI components
+- Handle loading/error states
+
+## Accessibility
+- Use semantic HTML elements
+- Include ARIA attributes where needed
+- Support keyboard navigation
+- Test with screen reader

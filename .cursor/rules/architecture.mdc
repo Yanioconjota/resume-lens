@@ -1,0 +1,55 @@
+---
+description: Architecture rules for ResumeLens
+globs: ["src/**/*"]
+---
+
+# Architecture Rules
+
+## Module Boundaries
+
+### UI Components (`src/components/ui/`)
+- Domain-agnostic primitives only
+- No knowledge of resume/analysis concepts
+- Accept `className` prop for customization
+- Use `cn()` for class merging
+
+### Feature Modules (`src/features/`)
+- Domain-aware components and hooks
+- Co-located types, hooks, and components
+- Export through index.ts barrel file
+- Can import from `ui/` and `lib/`
+
+### Server Code (`src/server/`)
+- Server-only code, never import in client
+- AI prompts and services
+- File parsing logic
+- Validation utilities
+
+### API Routes (`src/app/api/`)
+- Orchestrate server logic
+- Validate requests with Zod
+- Return structured JSON responses
+- Handle errors gracefully
+
+## Import Rules
+
+```typescript
+// Good: UI component imports lib utilities
+import { cn } from '@/lib/utils/cn';
+
+// Good: Feature imports UI components
+import { Button } from '@/components/ui/Button';
+
+// Bad: UI component imports feature code
+import { useResumeUpload } from '@/features/resume-upload';
+
+// Bad: Client code imports server code
+import { parseResumeWithAi } from '@/server/ai/services';
+```
+
+## File Organization
+
+- Keep files small and focused
+- One component per file
+- Co-locate related code in feature folders
+- Use index.ts for public exports

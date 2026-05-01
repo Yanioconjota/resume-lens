@@ -1,0 +1,37 @@
+ALEX JOHNSON
+Senior Frontend Engineer
+
+Contact:
+alex.johnson@email.com | +1 (555) 123-4567 | San Francisco, CA
+GitHub: github.com/alexjohnson | LinkedIn: linkedin.com/in/alexjohnson | Portfolio: alexjohnson.dev
+
+SUMMARY
+Senior Frontend Engineer with 7+ years of experience building scalable web applications. Specialized in React, TypeScript, and modern frontend architecture. Led teams of 5-8 engineers and delivered products used by millions of users.
+
+SKILLS
+React, TypeScript, Next.js, Node.js, GraphQL, Redux, Tailwind CSS, Jest, Cypress, AWS, Docker, CI/CD
+
+EXPERIENCE
+
+TechCorp Inc. | Senior Frontend Engineer | Jan 2021 - Present
+- Led frontend architecture for a SaaS platform serving 2M+ monthly active users
+- Reduced bundle size by 40% through code splitting and lazy loading strategies
+- Mentored 4 junior developers and conducted code reviews for the frontend team
+- Implemented design system used across 15+ products, improving development velocity by 30%
+
+StartupXYZ | Frontend Engineer | Mar 2018 - Dec 2020
+- Built React components library from scratch, adopted by 3 product teams
+- Integrated GraphQL API layer, reducing data fetching code by 50%
+- Improved Lighthouse performance score from 65 to 92
+- Collaborated with design team to implement responsive layouts and animations
+
+WebAgency | Junior Developer | Jun 2016 - Feb 2018
+- Developed responsive websites for 20+ clients using HTML, CSS, and JavaScript
+- Migrated legacy jQuery codebase to React for key client project
+- Participated in agile ceremonies and contributed to sprint planning
+
+EDUCATION
+University of California, Berkeley | B.S. Computer Science | 2016
+
+LANGUAGES
+English (Native), Spanish (Conversational)

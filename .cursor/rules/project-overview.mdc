@@ -1,0 +1,37 @@
+---
+description: Project context for ResumeLens
+globs: ["**/*"]
+---
+
+# ResumeLens Project Overview
+
+## What is ResumeLens?
+A full-stack Next.js application that analyzes resumes against target engineering roles using AI.
+
+## Tech Stack
+- Next.js 16+ (App Router)
+- TypeScript
+- Tailwind CSS (primary styling)
+- Zod (validation)
+- React hooks (state management)
+
+## Key Directories
+- `src/app/` - Pages and API routes
+- `src/features/` - Feature modules (resume-upload, resume-analysis, etc.)
+- `src/components/ui/` - Domain-agnostic UI primitives
+- `src/components/layout/` - App layout components
+- `src/server/` - Server-only code (AI, parsing)
+- `src/lib/` - Shared utilities, schemas, constants
+- `src/types/` - TypeScript type definitions
+
+## MVP Scope
+- Upload PDF, DOCX, TXT resumes
+- Select target role (Frontend, React, Angular, Full Stack)
+- AI parses and analyzes resume
+- Display structured feedback with rewrites
+
+## Out of Scope
+- Authentication
+- Database
+- File storage
+- OCR
