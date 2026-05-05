@@ -5,10 +5,10 @@
 - [x] Target role selection
 - [x] Resume upload (PDF, DOCX, TXT)
 - [x] Client-side validation
-- [ ] Server-side text extraction
+- [x] Server-side text extraction (PDF, DOCX, TXT)
 - [ ] AI-powered parsing
 - [ ] AI-powered analysis
-- [ ] Results display
+- [x] Results display (using mock data)
 
 ## Post-MVP: Phase 1
 

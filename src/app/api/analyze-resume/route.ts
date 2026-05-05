@@ -1,5 +1,8 @@
 import { NextResponse } from 'next/server';
 import { mockAnalysisResult } from '@/test/mocks';
+import { validateFile } from '@/server/validation';
+import { extractText } from '@/server/parsing';
+import { TARGET_ROLES, type TargetRole } from '@/lib/constants/targetRoles';
 
 export async function POST(request: Request) {
   try {
@@ -21,13 +24,43 @@ export async function POST(request: Request) {
       );
     }
 
-    // TODO: Implement actual file parsing and AI analysis
-    // For now, return mock data
+    if (!TARGET_ROLES.includes(targetRole as TargetRole)) {
+      return NextResponse.json(
+        { error: { code: 'INVALID_TARGET_ROLE', message: 'Invalid target role' } },
+        { status: 400 }
+      );
+    }
+
+    const validation = validateFile(file);
+    if (!validation.valid) {
+      return NextResponse.json({ error: validation.error }, { status: 400 });
+    }
+
+    const extractedText = await extractText(file);
+
+    if (!extractedText || extractedText.trim().length === 0) {
+      return NextResponse.json(
+        {
+          error: {
+            code: 'EMPTY_RESUME',
+            message: 'Could not extract any text from the file. Please ensure the file contains readable text.',
+          },
+        },
+        { status: 400 }
+      );
+    }
+
+    // TODO: Replace with real AI analysis in Slice 6
+    // For now, return mock data with extracted text info
     return NextResponse.json({
       ...mockAnalysisResult,
       analysis: {
         ...mockAnalysisResult.analysis,
         targetRole,
+      },
+      _debug: {
+        extractedTextLength: extractedText.length,
+        extractedTextPreview: extractedText.substring(0, 500) + (extractedText.length > 500 ? '...' : ''),
       },
     });
   } catch (error) {
